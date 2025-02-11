@@ -1,0 +1,67 @@
+
+{% extends 'mains.html' %}
+
+{% block content%}
+
+{%if details%}
+
+<form method="POST" action="#"  > 
+    {% csrf_token %}
+<div class="card  col-8 text-center mt-2 ">
+    
+    <div class="card-body">
+    
+      <h5 class="card-title" style="font-family: emoji; font-size:30px"><small>Title:</small>{{details.title}}</h5>
+     <p class="card-text" style="color:gray; font-size:20px;font-family:serif"> <small style="font:20px red font-type:">Description: </small>{{details.description}}</p>
+   {% if user.username == details.User_ID.username %}
+     <a class="btn btn-primary"  name="update" href="{%  url  'update_blog' details.id%} ">Update</a>
+    <a class="btn btn-danger"  name="delete" href="{% url 'delete_blog' details.id%}">Delete</a>
+{%endif%}
+<a class="btn btn-secondary"  name="back" href="{% url 'home'%}">Back</a>
+
+    </div>
+</form>
+  </div>
+ 
+<br>
+
+{% else %}
+{% endif%}
+<h3>Comment here..</h3>
+<div class="container">
+           
+            <ul class="list-group"  style="width:50%;text-center;margin-left:20%">
+              {% for message in blog %}
+             <li class="list-group-item" style="border-outline:3px;margin:2px;font-family:TimesNewRomen;font-size:20px;"> <a href="{% url 'user-p' message.user %}" style="display:block"> @{{message.user.username}}  </a> {{message.body}}
+               
+                 <small>{{message.Created|timesince}} ago<small>
+                  {% if request.user == message.user %}
+                <a href="{% url 'delete-message' message.id %}">
+                 Delete</a>
+              
+              </li>
+              {% endif %}
+
+              {% endfor%}
+              </ul> 
+           
+
+            
+
+                
+                    
+                    
+                 
+             
+           
+        
+
+      </div>
+      <div class="room__message">
+        <form action="" method="POST">
+          {% csrf_token %}
+          <input name="body" placeholder="Write your message here..." style="font-size:20px;margin-left:5%;margin-top:10px;width:50%;border-radius:5px; font-family:serif;padding:10px"  />
+        </form>
+      </div>
+    </div>
+    {% endblock %}

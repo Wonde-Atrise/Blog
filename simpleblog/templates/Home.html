@@ -1,0 +1,32 @@
+{% extends 'mains.html' %}
+
+{% block content%}
+<div class="container " style="margin-left:20%">
+<h3 ><a href="{% url 'create-blog'%}"  style="text-decoration:none;width:15%  ;marign-left:0px" class="btn btn-primary w-40 h-20">Creat Blog</a></h3>
+{%if blog_value%}
+{% for blog in blog_value%}
+
+<div class="card  col-8 text-center mt-2 ">
+    <div class="card-header" style="text-align:left" >
+     
+  
+      
+     <small style="font-family: cursive;">Posted by</small><a href="{% url 'user-p' blog.User_ID.username %}"  style="text-decoration:none; font-style:italic">@{{blog.User_ID.username}}
+     </a>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title" style="font-family: emoji; font-size:30px"><a href="{% url 'details' blog.id %}" >{{blog.title}}</a></h5>
+    </div>
+    <p style =" color:gray;position:relative;margin-left:500px;font-family:TimeNewRomen;font-size:15px">
+        Created at:-{{blog.Created | timesince }} ago
+      </p>
+  </div>
+ 
+<br>
+{%endfor %} 
+
+{% else %}
+<div style="color:red ;text-align:center; font-size:40px;font-family:TimeNewRomen;">No Post Found</div>
+{% endif%}
+</div>
+{% endblock %}
