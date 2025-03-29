@@ -2,20 +2,39 @@
 
 {% block content%}
 
-<form method="POST"  action="#">
-    {% csrf_token %}
-    {{ form}}
-        {% if  Notath == "NA" %}
+<form method="POST"  action="#" enctype = "multipart/form-data">
+   {% csrf_token %}
+    
+<div class ="container w-50">
+    <div class="mb-3">
+      <label for="exampleFormControlInput1" class="form-label float-lg-start">UserName</label>
+      <input type="text" class="form-control" id="exampleFormControlInput1" value="{{form.username}}" name="username">
+    </div>
+    <div class="mb-3">
+      <label for="exampleFormControlTextarea1" class="form-label float-lg-start">Bio </label>
+      <textarea class="form-control text-dark" id="exampleFormControlTextarea1" rows="3" name = "bio">
+         {{profile.Bio}}
+      </textarea>
+    </div>
+    <img src ="{{profile.Image.url}}" alt="No image"  style ="width:100px;height:100px; float:left" >
+    <div class="mb-3">
+      <input type="file" class="form-control" name ="image">
+    </div>
+  
+    
+ 
      <button class="btn btn-primary"  name="update" >Update</button>
      <a class="btn btn-secondary"  name="Cancle" href="{% url 'home' %}" >Back</a>
+
+
+     
+   </div>
+
  
-     {% else%}
-     <a class="btn btn-secondary"  name="Cancle" href="{% url 'home' %}" >Back</a>
- 
-   
- {% endif%}
+  
+
 
 
 </form>
-
+  
 {% endblock %}

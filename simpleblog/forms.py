@@ -13,10 +13,11 @@ class Blogdetails(ModelForm):
 class BlogForm(ModelForm):
      class Meta:
          model = Blogmodel
-         fields= ['title', 'description']
+         fields= ['title', 'description','BlogIm']
 
 
 class UserForm(ModelForm):
     class Meta:
         model = User
         fields = [ 'username', 'email']
+        
